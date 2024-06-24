@@ -1,6 +1,7 @@
 ﻿using EM.Application.Features.Employees.Commands.CreateEmployee;
 using EM.Application.Features.Employees.Commands.DeleteEmployee;
 using EM.Application.Features.Employees.Commands.UpdateEmployee;
+using EM.Application.Features.Employees.Queries.GetEmployeeList;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EM.WebApi.Controllers
@@ -9,6 +10,14 @@ namespace EM.WebApi.Controllers
     [ApiController]
     public class EmployeesController : BaseController
     {
+        [HttpGet]
+        public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken)
+        {
+            var result = await Mediator.Send(new GetEmployeeListQuery(), cancellationToken);
+
+            return Ok(result);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddAsync([FromBody] CreateEmployeeCommand command)
         {
