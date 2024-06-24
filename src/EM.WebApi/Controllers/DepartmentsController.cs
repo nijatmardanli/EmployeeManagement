@@ -1,4 +1,5 @@
-﻿using EM.Application.Features.Departments.Queries.GetDepartmentList;
+﻿using EM.Application.Features.Departments.Queries.GetDepartmentById;
+using EM.Application.Features.Departments.Queries.GetDepartmentList;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EM.WebApi.Controllers
@@ -7,6 +8,14 @@ namespace EM.WebApi.Controllers
     [ApiController]
     public class DepartmentsController : BaseController
     {
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetAsync(int id, CancellationToken cancellationToken)
+        {
+            var result = await Mediator.Send(new GetDepartmentByIdQuery() { Id = id }, cancellationToken);
+
+            return Ok(result);
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken)
         {
