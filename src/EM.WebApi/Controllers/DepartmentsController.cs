@@ -1,6 +1,7 @@
 ﻿using EM.Application.Features.Departments.Commands.CreateDepartment;
 using EM.Application.Features.Departments.Commands.DeleteDepartment;
 using EM.Application.Features.Departments.Commands.UpdateDepartment;
+using EM.Application.Features.Departments.Queries.FilterDepartment;
 using EM.Application.Features.Departments.Queries.GetDepartmentById;
 using EM.Application.Features.Departments.Queries.GetDepartmentList;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,14 @@ namespace EM.WebApi.Controllers
         public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken)
         {
             var result = await Mediator.Send(new GetDepartmentListQuery(), cancellationToken);
+
+            return Ok(result);
+        }
+
+        [HttpGet("Filter")]
+        public async Task<IActionResult> FilterAsync([FromQuery] FilterDepartmentQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Mediator.Send(query, cancellationToken);
 
             return Ok(result);
         }
