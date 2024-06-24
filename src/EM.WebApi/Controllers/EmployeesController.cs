@@ -1,6 +1,7 @@
 ﻿using EM.Application.Features.Employees.Commands.CreateEmployee;
 using EM.Application.Features.Employees.Commands.DeleteEmployee;
 using EM.Application.Features.Employees.Commands.UpdateEmployee;
+using EM.Application.Features.Employees.Queries.FilterEmployee;
 using EM.Application.Features.Employees.Queries.GetEmployeeById;
 using EM.Application.Features.Employees.Queries.GetEmployeeList;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,13 @@ namespace EM.WebApi.Controllers
         {
             var result = await Mediator.Send(new GetEmployeeListQuery(), cancellationToken);
 
+            return Ok(result);
+        }
+
+        [HttpGet("Filter")]
+        public async Task<IActionResult> FilterAsync([FromQuery] FilterEmployeeQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Mediator.Send(query, cancellationToken);
             return Ok(result);
         }
 
