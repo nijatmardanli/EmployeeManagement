@@ -1,5 +1,6 @@
 using EM.Application;
 using EM.Infrastructure;
+using EM.WebApi.Middlewares.ExceptionHandler;
 using EM.WebApi.Middlewares.RequestLogging;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.UseMiddleware<RequestLoggingMiddleware>();
+app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 
 app.MapControllers();
 
