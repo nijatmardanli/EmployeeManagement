@@ -1,4 +1,5 @@
 ﻿using EM.Application.Features.Employees.Commands.CreateEmployee;
+using EM.Application.Features.Employees.Commands.DeleteEmployee;
 using EM.Application.Features.Employees.Commands.UpdateEmployee;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +21,14 @@ namespace EM.WebApi.Controllers
         {
             var result = await Mediator.Send(command);
             return Ok(result);
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> DeleteAsync(int id, CancellationToken cancellationToken)
+        {
+            _ = await Mediator.Send(new DeleteEmployeeCommand() { Id = id }, cancellationToken);
+
+            return NoContent();
         }
     }
 }
