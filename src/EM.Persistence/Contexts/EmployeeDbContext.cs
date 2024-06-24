@@ -1,4 +1,5 @@
 ﻿using EM.Domain.Entities;
+using EM.Persistence.Interceptors;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
@@ -19,6 +20,8 @@ namespace EM.Persistence.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.AddInterceptors(new AuditingSaveChangesInterceptor());
+
             base.OnConfiguring(optionsBuilder);
         }
 
