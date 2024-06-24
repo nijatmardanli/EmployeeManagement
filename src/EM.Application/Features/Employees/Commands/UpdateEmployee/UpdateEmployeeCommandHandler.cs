@@ -29,7 +29,7 @@ namespace EM.Application.Features.Employees.Commands.UpdateEmployee
         {
             await _employeeBusinessRules.DepartmentMustBeExistAsync(request.DepartmentId, cancellationToken);
 
-            ISpecification<Employee> specification = new Specification<Employee>(Predicate: e => e.Id == request.Id);
+            ISpecification<Employee> specification = new Specification<Employee>(Predicate: e => e.Id == request.Id, Includes: new string[] { "Department" });
             Employee employee = await _employeeService.GetByIdAsync(id: request.Id, specification, cancellationToken: cancellationToken)
                 ?? throw new NotFoundException("Employee not found");
 

@@ -1,4 +1,5 @@
-﻿using EM.Domain.Common.Paging;
+﻿using EM.Application.Features.Departments.Services;
+using EM.Domain.Common.Paging;
 using EM.Domain.Common.Specification;
 using EM.Domain.Entities;
 using EM.Domain.Repositories;
@@ -10,12 +11,15 @@ namespace EM.Application.Features.Employees.Services
     {
         private readonly ICachedEmployeeRepository _cachedEmployeeRepository;
         private readonly IEmployeeRepository _employeeRepository;
+        private readonly IDepartmentService _departmentService;
 
         public EmployeeManager(ICachedEmployeeRepository cachedEmployeeRepository,
-                                 IEmployeeRepository employeeRepository)
+                               IEmployeeRepository employeeRepository,
+                               IDepartmentService departmentService)
         {
             _cachedEmployeeRepository = cachedEmployeeRepository;
             _employeeRepository = employeeRepository;
+            _departmentService = departmentService;
         }
 
         public async Task<Employee?> GetByIdAsync(int id, ISpecification<Employee> specification, CancellationToken cancellationToken = default)
@@ -64,6 +68,10 @@ namespace EM.Application.Features.Employees.Services
         public async Task<Employee> AddAsync(Employee employee, CancellationToken cancellationToken = default)
         {
             Employee createdEmployee = await _employeeRepository.AddAsync(employee, cancellationToken);
+
+            ISpecification<Department> specification = new Specification<Department>(Predicate: d => d.Id == employee.DepartmentId);
+            createdEmployee.Department = (await _departmentService.GetByIdAsync(employee.DepartmentId, specification, cancellationToken))!;
+            
             await _cachedEmployeeRepository.SetAsync(createdEmployee);
 
             return createdEmployee;
