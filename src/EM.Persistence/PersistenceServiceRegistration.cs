@@ -1,5 +1,7 @@
 ﻿using EM.Domain.Repositories;
+using EM.Domain.Repositories.Cached;
 using EM.Persistence.Contexts;
+using EM.Persistence.Repositories.Cached;
 using EM.Persistence.Repositories.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -13,8 +15,10 @@ namespace EM.Persistence
         public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IDepartmentRepository, EfDepartmentRepository>();
-            
+            services.AddScoped<ICachedDepartmentRepository, CachedDepartmentRepository>();
+
             services.AddScoped<IEmployeeRepository, EfEmployeeRepository>();
+            services.AddScoped<ICachedEmployeeRepository, CachedEmployeeRepository>();
 
             services.AddScoped<EmployeeDbContextInitializer>();
 
