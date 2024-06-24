@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EM.Application.Features.Departments.Commands.CreateDepartment;
+using EM.Application.Features.Departments.Commands.UpdateDepartment;
 using EM.Application.Features.Departments.Dtos;
 using EM.Domain.Entities;
 
@@ -13,6 +14,9 @@ namespace EM.Application.Features.Departments.Mappers.AutoMapper
 
             CreateMap<CreateDepartmentCommand, Department>().ReverseMap();
             CreateMap<Department, CreatedDepartmentDto>().ReverseMap();
+
+            CreateMap<UpdateDepartmentCommand, Department>().ReverseMap();
+            CreateMap<Department, UpdatedDepartmentDto>().ReverseMap();
         }
     }
 }
