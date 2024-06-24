@@ -24,8 +24,10 @@ namespace EM.Persistence
 
             services.AddDbContext<EmployeeDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("EmployeeDb")));
-
             
+            services.AddHealthChecks().AddDbContextCheck<EmployeeDbContext>();
+
+
             ConnectionMultiplexer cluster = ConnectionMultiplexer.Connect(new ConfigurationOptions
             {
                 EndPoints = { configuration.GetConnectionString("Redis") }

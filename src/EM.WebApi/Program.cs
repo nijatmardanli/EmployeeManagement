@@ -29,6 +29,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 
     await app.InitializeDatabaseAsync();
+
+    app.MapHealthChecks("/healthz");
 }
 
 app.UseHttpsRedirection();
