@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\EM.Application\EM.Application.csproj" />
     <ProjectReference Include="..\EM.Infrastructure\EM.Infrastructure.csproj" />
+    <ProjectReference Include="..\EM.Persistence\EM.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

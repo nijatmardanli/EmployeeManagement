@@ -1,5 +1,6 @@
 using EM.Application;
 using EM.Infrastructure;
+using EM.Persistence;
 using EM.WebApi.Middlewares.ExceptionHandler;
 using EM.WebApi.Middlewares.RequestLogging;
 
@@ -14,6 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddApplicationServices();
 
 var app = builder.Build();
