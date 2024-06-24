@@ -11,3 +11,15 @@ services:
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+
+  employeedb:
+    container_name: EmployeeDb
+    environment:
+      ACCEPT_EULA: 'Y'
+      MSSQL_SA_PASSWORD: 'SA_Admin@123'
+      MSSQL_PID: 'Developer' 
+    ports: 
+      - "1433:1433"
+    volumes:
+      - employeedb_mssql:/var/lib/mssql/data/ 
