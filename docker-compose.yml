@@ -10,6 +10,8 @@ services:
   employeedb:
     image: mcr.microsoft.com/mssql/server:2022-latest    
 
+  distributedcache:
+    image: redis/redis-stack-server:latest
 
 volumes:
   employeedb_mssql:

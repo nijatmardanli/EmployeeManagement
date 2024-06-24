@@ -11,7 +11,9 @@ services:
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
-
+    depends_on:
+      - employeedb
+      - distributedcache
 
   employeedb:
     container_name: EmployeeDb
@@ -23,3 +25,9 @@ services:
       - "1433:1433"
     volumes:
       - employeedb_mssql:/var/lib/mssql/data/ 
+
+  distributedcache:
+    container_name: RedisCache
+    restart: always
+    ports: 
+      - "127.0.0.1:6379:6379/tcp"
