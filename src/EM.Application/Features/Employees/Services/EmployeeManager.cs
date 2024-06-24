@@ -37,20 +37,11 @@ namespace EM.Application.Features.Employees.Services
 
         public async Task<IReadOnlyList<Employee>> GetListAsync(ISpecification<Employee>? specification = default, CancellationToken cancellationToken = default)
         {
-            List<Employee> employees = await _cachedEmployeeRepository.GetAllAsync();
+            List<Employee> employees = await _employeeRepository.GetListAsync(specification, cancellationToken);
 
-            if (employees.Count == 0)
+            if (employees.Count > 0)
             {
-                employees = await _employeeRepository.GetListAsync(specification, cancellationToken);
-
-                if (employees.Count > 0)
-                {
-                    await AddEmployeesToCache(employees);
-                }
-            }
-            else
-            {
-                employees = employees.OrderBy(x => x.Id).ToList();
+                await AddEmployeesToCache(employees);
             }
 
             return employees;

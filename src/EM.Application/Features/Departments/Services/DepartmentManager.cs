@@ -38,20 +38,11 @@ namespace EM.Application.Features.Departments.Services
 
         public async Task<IReadOnlyList<Department>> GetListAsync(ISpecification<Department>? specification = default, CancellationToken cancellationToken = default)
         {
-            List<Department> departments = await _cachedDepartmentRepository.GetAllAsync();
+            List<Department> departments = await _departmentRepository.GetListAsync(specification, cancellationToken);
 
-            if (departments.Count == 0)
+            if (departments.Count > 0)
             {
-                departments = await _departmentRepository.GetListAsync(specification, cancellationToken);
-
-                if (departments.Count > 0)
-                {
-                    await AddDepartmentsToCache(departments);
-                }
-            }
-            else
-            {
-                departments = departments.OrderBy(x => x.Id).ToList();
+                await AddDepartmentsToCache(departments);
             }
 
             return departments;

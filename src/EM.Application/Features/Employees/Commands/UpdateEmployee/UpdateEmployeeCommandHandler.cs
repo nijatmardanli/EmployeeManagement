@@ -33,15 +33,20 @@ namespace EM.Application.Features.Employees.Commands.UpdateEmployee
             Employee employee = await _employeeService.GetByIdAsync(id: request.Id, specification, cancellationToken: cancellationToken)
                 ?? throw new NotFoundException("Employee not found");
 
-            employee.Name = request.Name;
-            employee.LastName = request.LastName;
-            employee.BirthDate = request.BirthDate;
-            employee.DepartmentId = request.DepartmentId;
+            UpdateEmployeeDetails(request, employee);
 
             Employee updatedEmployee = await _employeeService.UpdateAsync(employee, cancellationToken);
 
             UpdatedEmployeeDto result = _mapper.Map<UpdatedEmployeeDto>(updatedEmployee);
             return result;
+        }
+
+        private void UpdateEmployeeDetails(UpdateEmployeeCommand request, Employee employee)
+        {
+            employee.Name = request.Name;
+            employee.LastName = request.LastName;
+            employee.BirthDate = request.BirthDate;
+            employee.DepartmentId = request.DepartmentId;
         }
     }
 }
