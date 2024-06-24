@@ -1,4 +1,5 @@
 ﻿using EM.Application.Features.Employees.Commands.CreateEmployee;
+using EM.Application.Features.Employees.Commands.UpdateEmployee;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EM.WebApi.Controllers
@@ -12,6 +13,13 @@ namespace EM.WebApi.Controllers
         {
             var result = await Mediator.Send(command);
             return Created("", result);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateAsync([FromBody] UpdateEmployeeCommand command)
+        {
+            var result = await Mediator.Send(command);
+            return Ok(result);
         }
     }
 }

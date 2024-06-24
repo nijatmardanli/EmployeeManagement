@@ -11,6 +11,8 @@ namespace EM.Application.Features.Employees.Mappers.AutoMapper
         {
             CreateMap<CreateEmployeeCommand, Employee>().ReverseMap();
             CreateMap<Employee, CreatedEmployeeDto>().ReverseMap();
+
+            CreateMap<Employee, UpdatedEmployeeDto>().ReverseMap();
         }
     }
 }
