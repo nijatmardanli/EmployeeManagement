@@ -1,6 +1,9 @@
 using EM.Application;
+using EM.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.UseInfrastructureWebApplicationBuilder();
 
 // Add services to the container.
 
