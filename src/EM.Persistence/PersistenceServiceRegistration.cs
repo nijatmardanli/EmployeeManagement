@@ -9,6 +9,8 @@ namespace EM.Persistence
     {
         public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddScoped<EmployeeDbContextInitializer>();
+
             services.AddDbContext<EmployeeDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("EmployeeDb")));
 

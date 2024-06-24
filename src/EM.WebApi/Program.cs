@@ -1,6 +1,7 @@
 using EM.Application;
 using EM.Infrastructure;
 using EM.Persistence;
+using EM.Persistence.Contexts;
 using EM.WebApi.Middlewares.ExceptionHandler;
 using EM.WebApi.Middlewares.RequestLogging;
 
@@ -25,6 +26,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    await app.InitializeDatabaseAsync();
 }
 
 app.UseHttpsRedirection();
