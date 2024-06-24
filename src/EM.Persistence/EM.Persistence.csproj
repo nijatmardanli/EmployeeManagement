@@ -22,6 +22,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\EM.CrossCuttingConcerns\EM.CrossCuttingConcerns.csproj" />
 		<ProjectReference Include="..\EM.Domain\EM.Domain.csproj" />
+		<ProjectReference Include="..\EM.Infrastructure\EM.Infrastructure.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

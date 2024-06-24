@@ -4,6 +4,7 @@ using EM.Persistence.Repositories.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using StackExchange.Redis;
 
 namespace EM.Persistence
 {
@@ -19,6 +20,14 @@ namespace EM.Persistence
 
             services.AddDbContext<EmployeeDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("EmployeeDb")));
+
+            
+            ConnectionMultiplexer cluster = ConnectionMultiplexer.Connect(new ConfigurationOptions
+            {
+                EndPoints = { configuration.GetConnectionString("Redis") }
+            });
+
+            services.AddSingleton(cluster);
 
             return services;
         }
