@@ -3,6 +3,7 @@ using EM.Domain.Common.Specification;
 using EM.Domain.Entities;
 using EM.Domain.Repositories;
 using EM.Domain.Repositories.Cached;
+using System.Linq.Expressions;
 
 namespace EM.Application.Features.Departments.Services
 {
@@ -90,6 +91,12 @@ namespace EM.Application.Features.Departments.Services
         {
             await _departmentRepository.DeleteAsync(department, cancellationToken);
             await _cachedDepartmentRepository.DeleteAsync(department);
+        }
+
+        public async Task<bool> AnyAsync(Expression<Func<Department, bool>>? predicate = null,
+                                         CancellationToken cancellationToken = default)
+        {
+            return await _departmentRepository.AnyAsync(predicate, cancellationToken);
         }
 
         private async Task AddDepartmentsToCache(IReadOnlyList<Department> departments)

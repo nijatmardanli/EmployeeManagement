@@ -1,6 +1,7 @@
 ﻿using EM.Application.Behaviours.Transaction;
 using EM.Application.Behaviours.Validation;
 using EM.Application.Features.Departments.Services;
+using EM.Application.Features.Employees.Rules;
 using EM.Application.Features.Employees.Services;
 using FluentValidation;
 using MediatR;
@@ -14,7 +15,9 @@ namespace EM.Application
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IDepartmentService, DepartmentManager>();
+
             services.AddScoped<IEmployeeService, EmployeeManager>();
+            services.AddScoped<EmployeeBusinessRules>();
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

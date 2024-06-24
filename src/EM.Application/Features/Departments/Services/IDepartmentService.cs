@@ -1,6 +1,7 @@
 ﻿using EM.Domain.Common.Paging;
 using EM.Domain.Common.Specification;
 using EM.Domain.Entities;
+using System.Linq.Expressions;
 
 namespace EM.Application.Features.Departments.Services
 {
@@ -12,5 +13,6 @@ namespace EM.Application.Features.Departments.Services
         Task<Department> AddAsync(Department department, CancellationToken cancellationToken = default);
         Task<Department> UpdateAsync(Department department, CancellationToken cancellationToken = default);
         Task DeleteAsync(Department department, CancellationToken cancellationToken = default);
+        Task<bool> AnyAsync(Expression<Func<Department, bool>>? predicate = null, CancellationToken cancellationToken = default);
     }
 }
