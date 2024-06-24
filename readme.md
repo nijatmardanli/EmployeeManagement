@@ -47,7 +47,7 @@ You can run the project either through Visual Studio or by using Docker Compose.
 
 ## Technologies Used
 
-- ASP.NET Core
+- ASP.NET 6
 - Docker
 - SQL Server
 - Redis
