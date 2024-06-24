@@ -1,5 +1,6 @@
 using EM.Application;
 using EM.Infrastructure;
+using EM.WebApi.Middlewares.RequestLogging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<RequestLoggingMiddleware>();
 
 app.MapControllers();
 
