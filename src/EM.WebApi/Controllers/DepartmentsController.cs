@@ -1,4 +1,5 @@
 ﻿using EM.Application.Features.Departments.Commands.CreateDepartment;
+using EM.Application.Features.Departments.Commands.DeleteDepartment;
 using EM.Application.Features.Departments.Commands.UpdateDepartment;
 using EM.Application.Features.Departments.Queries.GetDepartmentById;
 using EM.Application.Features.Departments.Queries.GetDepartmentList;
@@ -40,6 +41,14 @@ namespace EM.WebApi.Controllers
             var result = await Mediator.Send(command, cancellationToken);
 
             return Ok(result);
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> DeleteAsync(int id, CancellationToken cancellationToken)
+        {
+            _ = await Mediator.Send(new DeleteDepartmentCommand() { Id = id }, cancellationToken);
+
+            return NoContent();
         }
     }
 }
