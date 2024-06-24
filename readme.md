@@ -1,4 +1,4 @@
-# Employee and Department Management API
+# Employee Management API
 
 This project provides a set of APIs to manage employees and departments. The project is built with ASP.NET Core and uses Docker for containerization. SQL Server is used as the database, and Redis is used for caching.
 
