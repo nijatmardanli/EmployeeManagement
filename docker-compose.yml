@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  em.webapi:
+    image: ${DOCKER_REGISTRY-}emwebapi
+    build:
+      context: .
+      dockerfile: src/EM.WebApi/Dockerfile
