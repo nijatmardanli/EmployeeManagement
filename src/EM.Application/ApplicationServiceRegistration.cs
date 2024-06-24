@@ -1,5 +1,6 @@
 ﻿using EM.Application.Behaviours.Transaction;
 using EM.Application.Behaviours.Validation;
+using EM.Application.Features.Departments.Services;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +12,8 @@ namespace EM.Application
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            services.AddScoped<IDepartmentService, DepartmentManager>();
+
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
