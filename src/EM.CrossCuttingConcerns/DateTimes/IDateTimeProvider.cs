@@ -9,6 +9,6 @@ namespace EM.CrossCuttingConcerns.DateTimes
 
         public static DateTime Now => TimeZoneInfo.ConvertTime(DateTime.UtcNow, AzerbaijanTimeZoneInfo);
 
-        public static DateTime DateNow => TimeZoneInfo.ConvertTime(DateTime.UtcNow, AzerbaijanTimeZoneInfo).Date;
+        public static DateTime DateNow => Now.Date;
     }
 }

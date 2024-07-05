@@ -12,10 +12,5 @@ namespace EM.Persistence.Repositories.Cached
         public CachedEmployeeRepository(ConnectionMultiplexer cluster, CacheSettings cacheSettings) : base(cluster, cacheSettings)
         {
         }
-
-        protected override string GetKey(object id)
-        {
-            return $"{KeyName}:{id}";
-        }
     }
 }

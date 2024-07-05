@@ -87,7 +87,10 @@ namespace EM.Persistence.Repositories.Cached
 
         protected abstract string KeyName { get; }
 
-        protected abstract string GetKey(object id);
+        protected virtual string GetKey(object id)
+        {
+            return $"{KeyName}:{id}";
+        }
 
         protected async Task<RedisKey[]> GetKeysAsync(string keyPattern)
         {
