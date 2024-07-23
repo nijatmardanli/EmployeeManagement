@@ -36,16 +36,16 @@ namespace EM.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddAsync([FromBody] CreateEmployeeCommand command)
+        public async Task<IActionResult> AddAsync([FromBody] CreateEmployeeCommand command, CancellationToken cancellationToken)
         {
-            var result = await Mediator.Send(command);
+            var result = await Mediator.Send(command, cancellationToken);
             return Created("", result);
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateAsync([FromBody] UpdateEmployeeCommand command)
+        public async Task<IActionResult> UpdateAsync([FromBody] UpdateEmployeeCommand command, CancellationToken cancellationToken)
         {
-            var result = await Mediator.Send(command);
+            var result = await Mediator.Send(command, cancellationToken);
             return Ok(result);
         }
 
